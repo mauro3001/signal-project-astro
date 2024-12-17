@@ -28,9 +28,13 @@ jobs:
         with:
           node-version: lts/*
 
-      # Not using npm? Change `npm ci` to `yarn install` or `pnpm i`
+      # Instalar pnpm
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      # Instalar dependencias con pnpm
       - name: Install dependencies
-        run: pnpm i
+        run: pnpm install
 
       - name: Install step
         run: "pnpm install"

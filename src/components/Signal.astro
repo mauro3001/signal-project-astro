@@ -6,12 +6,12 @@ const information = [
   {
     title: "sena-1",
     href: "/signals/sena_1.GIF",
-    response: "primera",
+    response: "bienvenidos",
   },
   {
     title: "sena-2",
     href: "/signals/sena_2.GIF",
-    response: "segunda",
+    response: "con mucho gusto",
   },
   {
     title: "sena-3",
@@ -21,7 +21,7 @@ const information = [
   {
     title: "sena-4",
     href: "/signals/sena_4.GIF",
-    response: "cuarta",
+    response: "felicitaciones",
   },
   {
     title: "sena-5",
@@ -108,22 +108,31 @@ const randomItem = information[randomIndex];
     event.preventDefault();
 
     const valueResponse = inputValue.value.trim().toLowerCase();
-    console.log(valueResponse, "valor responsable");
-    console.log(hiddenResponse, "Respuesta oculta");
 
     if (valueResponse == hiddenResponse) {
       resultMessage.textContent = "¡Correcto! La respuesta es correcta 😊.";
       resultMessage.classList.add("text-green-700");
       resultMessage.classList.remove("text-red-700");
+
+      showMessageAndClearInput();
+
+      setTimeout(() => {
+        location.reload();
+      }, 3000);
     } else {
       resultMessage.textContent = "¡Incorrecto! Intenta de nuevo 😞.";
       resultMessage.classList.add("text-red-700");
       resultMessage.classList.remove("text-green-700");
-    }
 
+      showMessageAndClearInput();
+    }
+  });
+
+  //function to show message and clean input
+  const showMessageAndClearInput = () => {
     containerMessage.classList.remove("hidden");
     inputValue.value = "";
-  });
+  };
 
   const nextButton = document.getElementById("nextItem") as HTMLButtonElement;
 

@@ -28,11 +28,15 @@ jobs:
         with:
           node-version: lts/*
 
+      # Not using npm? Change `npm ci` to `yarn install` or `pnpm i`
+      - name: Install dependencies
+        run: pnpm ci
+
       - name: Install step
-        run: "npm install"
+        run: "pnpm install"
 
       - name: Build step
-        run: "npm run build"
+        run: "pnpm run build"
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1

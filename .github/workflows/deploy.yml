@@ -37,8 +37,8 @@ jobs:
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: "signals-project"
-          entrypoint: "https://jsr.io/@std/http/1.0.7/file_server.ts"
+          project: "mauro3001-signal-proj-62"
+          entrypoint: "jsr:@std/http/file-server"
           root: "dist"
           
           

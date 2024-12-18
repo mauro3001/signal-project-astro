@@ -42,7 +42,7 @@ jobs:
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: "mauro3001-signal-proj-62"
+          project: "signals-project"
           entrypoint: "jsr:@std/http/file-server"
           root: "dist"
           

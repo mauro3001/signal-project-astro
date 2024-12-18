@@ -1,38 +1,6 @@
 ---
 import Next from "src/icons/Next.astro";
 import SendResponse from "src/icons/Send.astro";
-
-const information = [
-  {
-    title: "sena-1",
-    href: "/signals/sena_1.GIF",
-    response: "bienvenidos",
-  },
-  {
-    title: "sena-2",
-    href: "/signals/sena_2.GIF",
-    response: "con mucho gusto",
-  },
-  {
-    title: "sena-3",
-    href: "/signals/sena_3.GIF",
-    response: "como esta",
-  },
-  {
-    title: "sena-4",
-    href: "/signals/sena_4.GIF",
-    response: "felicitaciones",
-  },
-  {
-    title: "sena-5",
-    href: "/signals/sena_5.GIF",
-    response: "excelente",
-  },
-];
-
-//Random number for different signals about information array
-const randomIndex = Math.floor(Math.random() * information.length);
-const randomItem = information[randomIndex];
 ---
 
 <section class="max-w-5xl mx-auto w-full px-4 py-8">
@@ -46,17 +14,8 @@ const randomItem = information[randomIndex];
     <div class="bg-white rounded-3xl p-4 w-full">
       <form id="signalForm">
         <div class="grid place-content-center mb-6">
-          {
-            (
-              <div class="p-4 rounded-2xl w-full lg:h-[450px]">
-                <img
-                  src={randomItem.href}
-                  alt={randomItem.title}
-                  class="h-full max-w-full object-contain mx-auto"
-                />
-              </div>
-            )
-          }
+          <div class="p-4 rounded-2xl w-full lg:h-[450px]" id="signalImage">
+          </div>
         </div>
         <div class="mb-6">
           <input
@@ -89,27 +48,49 @@ const randomItem = information[randomIndex];
       >
         <p id="resultMessage" class="text-center font-semibold text-2xl"></p>
       </div>
-      <span id="hiddenResponse" class="hidden">{randomItem.response}</span>
     </div>
   </div>
 </section>
 
 <script>
+  //Define information about signals in the server
+  const information = [
+    { title: "sena-1", href: "/signals/sena_1.GIF", response: "bienvenidos" },
+    {
+      title: "sena-2",
+      href: "/signals/sena_2.GIF",
+      response: "con mucho gusto",
+    },
+    { title: "sena-3", href: "/signals/sena_3.GIF", response: "como esta" },
+    {
+      title: "sena-4",
+      href: "/signals/sena_4.GIF",
+      response: "felicitaciones",
+    },
+    { title: "sena-5", href: "/signals/sena_5.GIF", response: "excelente" },
+  ];
+
+  const signalImage = document.getElementById(
+    "signalImage"
+  ) as HTMLImageElement;
+
+  //Get random number
+  const randomIndex = Math.floor(Math.random() * information.length);
+  const randomItem = information[randomIndex];
+
+  signalImage.innerHTML = `<img src="${randomItem.href}" alt="${randomItem.title}" class="h-full max-w-full object-contain mx-auto" />`;
+
   const form = document.getElementById("signalForm");
   const inputValue = document.getElementById("responseInput") as any;
   const resultMessage = document.getElementById("resultMessage") as any;
   const containerMessage = document.getElementById("containerMessage") as any;
-  const hiddenResponse = document
-    .getElementById("hiddenResponse")
-    ?.textContent?.trim()
-    .toLowerCase();
 
   form?.addEventListener("submit", function (event) {
     event.preventDefault();
 
     const valueResponse = inputValue.value.trim().toLowerCase();
 
-    if (valueResponse == hiddenResponse) {
+    if (valueResponse == randomItem.response.trim().toLowerCase()) {
       resultMessage.textContent = "¡Correcto! La respuesta es correcta 😊.";
       resultMessage.classList.add("text-green-700");
       resultMessage.classList.remove("text-red-700");
